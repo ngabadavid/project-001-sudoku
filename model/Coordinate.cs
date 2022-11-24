@@ -2,12 +2,12 @@
 {
     public class Coordinate
     {
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
-        public Coordinate(int positionX, int positionY)
+        public int Row { get; set; }
+        public int Column { get; set; }
+        public Coordinate(int row, int column)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
+            this.Row = row;
+            this.Column = column;
         }
     }
 }

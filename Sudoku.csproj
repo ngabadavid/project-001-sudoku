@@ -45,9 +45,7 @@
   <ItemGroup>
     <Compile Include="model\Board.cs" />
     <Compile Include="model\Cell.cs" />
-    <Compile Include="model\CellCoordinate.cs" />
     <Compile Include="model\Coordinate.cs" />
-    <Compile Include="model\Rectangle.cs" />
     <Compile Include="model\Grid.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
