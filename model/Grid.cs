@@ -10,76 +10,66 @@ namespace Sudoku.model
         public int Width { get; set; }
         public int Height { get; set; }
         public Cell[,] Cells { get; set; }
-        public Grid(int tabId, int width, int height, Cell[,] cells, Coordinate coordinate )
+        public Grid(int gridId, int width, int height, Cell[,] cells, Coordinate coordinate )
         {
             Random random = new Random(DateTime.UtcNow.Millisecond);
-            this.GridId = tabId;
+            this.GridId = gridId;
             this.Width = width;
             this.Height = height;
             this.Cells = cells;
             this.Coordinate = coordinate;
+
+            //For coding purpose
             for (int positionX = 0; positionX < this.Width; positionX++)
             {
                 for (int positionY = 0; positionY < this.Height; positionY++)
                 {
-                    //List<CellCoordinate> cellCoordinates = new List<CellCoordinate>();
-                    //cellCoordinates.Add(new CellCoordinate(new Coordinate(positionX, positionY), this.GridId));
-                    this.Cells[positionX, positionY] = new Cell(new CellCoordinate(new Coordinate(positionX, positionY), this.GridId), random.Next(1, this.Width));
+                    List<CellCoordinate> cellCoordinates = new List<CellCoordinate>();
+                    cellCoordinates.Add(new CellCoordinate(this.GridId, new Coordinate(positionX, positionY)));
+                    this.Cells[positionX, positionY] = new Cell(cellCoordinates, random.Next(1, this.Width));
                 }
             }
         }
 
+        /*public void link(Grid grid)
+        {
+            Rectangle rectangle = this.GetIntersection(grid);
+            for (int i = rectangle.Origin.PositionX; i <= rectangle.Opposite.PositionX; i++)
+            {
+                for (int j = rectangle.Origin.PositionY; j <= rectangle.Opposite.PositionY; j++)
+                {
+                    this.Cells[i - this.Coordinate.PositionX, j - this.Coordinate.PositionX].link(grid.Cells[i - grid.Coordinate.PositionX, j - grid.Coordinate.PositionX]);
+                }
+            }
+
+        }
+
+        public Rectangle GetIntersection(Grid grid)
+        {
+            int orgX = Math.Max(this.Coordinate.PositionX, grid.Coordinate.PositionX);
+            int orgY = Math.Max(this.Coordinate.PositionY, grid.Coordinate.PositionY);
+            Coordinate origin = new Coordinate(orgX, orgY);
+
+            int oppX = Math.Min(this.Coordinate.PositionX + this.Width - 1, grid.Coordinate.PositionX + grid.Width - 1);
+            int oppY = Math.Min(this.Coordinate.PositionY + this.Height - 1, grid.Coordinate.PositionY + grid.Height - 1);
+            Coordinate opposite = new Coordinate(oppX, oppY);
+
+            return new Rectangle(origin, opposite);
+        }*/
+
         public void print()
         {
-            for(int positionX = 0 ; positionX < this.Width; positionX++)
+            for (int positionX = 0; positionX < this.Width; positionX++)
             {
-                Console.WriteLine("---------------------------");
-                for(int positionY = 0 ; positionY < this.Height; positionY++)
+                for (int positionY = 0; positionY < this.Height; positionY++)
                 {
                     Console.Write("|");
-                    Console.Write(this.Cells[positionX,positionY].Value);
+                    Console.Write(this.Cells[positionX, positionY].Value);
                     Console.Write("|");
                 }
                 Console.WriteLine("");
             }
         }
 
-         public Cell getCellByCoordinate(Coordinate coordinate)
-        {
-            return this.Cells[coordinate.PositionX, coordinate.PositionY];
-        }
-
-        public void insert(Coordinate coordinate, int value)
-        {
-            this.getCellByCoordinate(coordinate).Value = value;
-        }
-
-        public Rectangle GetIntersection(Grid tab)
-        {
-            int orgX = Math.Max(this.Coordinate.PositionX, tab.Coordinate.PositionX);
-            int orgY = Math.Max(this.Coordinate.PositionY, tab.Coordinate.PositionY);
-            Coordinate origin = new Coordinate(orgX, orgY);
-
-            int oppX = Math.Min(this.Coordinate.PositionX + this.Width - 1, tab.Coordinate.PositionX + tab.Width - 1);
-            int oppY = Math.Min(this.Coordinate.PositionY + this.Height - 1, tab.Coordinate.PositionY + tab.Height - 1);
-            Coordinate opposite = new Coordinate(oppX, oppY);
-
-            return new Rectangle(origin, opposite);
-        }
-
-        public void link(Grid tab)
-        {
-            Rectangle rectangle = this.GetIntersection(tab);
-            for(int i = rectangle.Origin.PositionX; i<= rectangle.Opposite.PositionX; i++)
-            {
-                for (int j = rectangle.Origin.PositionY; j <= rectangle.Opposite.PositionY; j++)
-                {
-                    this.Cells[i - this.Coordinate.PositionX, j - this.Coordinate.PositionX].link(tab.Cells[i - tab.Coordinate.PositionX, j - tab.Coordinate.PositionX]);
-                }
-            }
-
-        }
-
-       
     }
 }

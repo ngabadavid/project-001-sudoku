@@ -2,11 +2,11 @@
 {
     public class CellCoordinate
     {
-        public int TabId { get; set; }
+        public int GridId { get; set; }
         public Coordinate Coordinate { get; set; }
-        public CellCoordinate(Coordinate coordinate, int tabId)
+        public CellCoordinate(int gridId,Coordinate coordinate)
         {
-            this.TabId = tabId;
+            this.GridId = gridId;
             this.Coordinate = coordinate;
         }
     }
