@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sudoku.model
 {
@@ -41,6 +42,15 @@ namespace Sudoku.model
         public Coordinate transformAbsoluteCoordinateToRelativeCoordinate(Coordinate absoluteCoordinate, Grid grid)
         {
             return new Coordinate(absoluteCoordinate.Row - grid.Origin.Row, absoluteCoordinate.Column - grid.Origin.Column);
+        }
+
+        public void print()
+        {
+            Console.WriteLine("Board: =====================================");
+            foreach (Grid gridElement in this.Grids)
+            {
+                gridElement.print();
+            }
         }
     }
 }
