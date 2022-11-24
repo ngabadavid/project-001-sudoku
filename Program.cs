@@ -11,7 +11,8 @@ namespace Sudoku
     {
         static void Main(string[] args)
         {
-            Coordinate origin1 = new Coordinate(0, 0);
+            // Test insertion : Success
+            /*Coordinate origin1 = new Coordinate(0, 0);
             Coordinate opposite1 = new Coordinate(1, 1);
             Cell cell100 = new Cell(0);
             Cell cell101 = new Cell(1);
@@ -45,7 +46,45 @@ namespace Sudoku
             board.insertValueAtGivenCoordinate(9, new Coordinate(1, 1));
             board.print();
             board.insertValueAtGivenCoordinate(0, new Coordinate(2, 2));
+            board.print();*/
+
+            Coordinate origin = new Coordinate(0, 0);
+            Coordinate opposite = new Coordinate(3, 3);
+            Cell cell00 = new Cell(0);
+            Cell cell01 = new Cell(0);
+            Cell cell02 = new Cell(0);
+            Cell cell03 = new Cell(0);
+            Cell cell10 = new Cell(0);
+            Cell cell11 = new Cell(0);
+            Cell cell12 = new Cell(0);
+            Cell cell13 = new Cell(0);
+            Cell cell20 = new Cell(0);
+            Cell cell21 = new Cell(0);
+            Cell cell22 = new Cell(0);
+            Cell cell23 = new Cell(0);
+            Cell cell30 = new Cell(0);
+            Cell cell31 = new Cell(0);
+            Cell cell32 = new Cell(0);
+            Cell cell33 = new Cell(0);
+            Cell[,] cells = { 
+                { cell00 , cell01, cell02, cell03 },
+                { cell10 , cell11, cell12, cell13 },
+                { cell20 , cell21, cell22, cell23 },
+                { cell30 , cell31, cell32, cell33 },
+            };
+            Grid grid = new Grid(origin, opposite, cells);
+            grid.print();
+
+            List<Grid> grids = new List<Grid>();
+            grids.Add(grid);
+
+            Board board = new Board(grids);
             board.print();
+
+            board.insertValueAtGivenCoordinate(8, new Coordinate(0, 0));
+            board.insertValueAtGivenCoordinate(8, new Coordinate(0, 2));
+            board.insertValueAtGivenCoordinate(4, new Coordinate(0, 1));
+            board.insertValueAtGivenCoordinate(4, new Coordinate(0, 3));
         }
     }
 }

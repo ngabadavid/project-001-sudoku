@@ -22,6 +22,8 @@ namespace Sudoku.model
                     gridsContainingCellAtGivenCoordinate.Add(grid);
                     Coordinate relativeCoordinate = transformAbsoluteCoordinateToRelativeCoordinate(absoluteCoordinate, grid);
                     grid.Cells[relativeCoordinate.Row, relativeCoordinate.Column].Value = value;
+                    grid.print();
+                    Resolver.check_input_grid(grid);
                 }
             }
             return gridsContainingCellAtGivenCoordinate;

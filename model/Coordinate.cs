@@ -1,4 +1,6 @@
-﻿namespace Sudoku.model
+﻿using System;
+
+namespace Sudoku.model
 {
     public class Coordinate
     {
@@ -8,6 +10,11 @@
         {
             this.Row = row;
             this.Column = column;
+        }
+
+        public void print()
+        {
+            Console.WriteLine("("+ Row +","+ Column +")");
         }
     }
 }
