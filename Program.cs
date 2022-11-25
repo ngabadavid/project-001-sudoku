@@ -50,15 +50,15 @@ namespace Sudoku
 
             Coordinate origin = new Coordinate(0, 0);
             Coordinate opposite = new Coordinate(3, 3);
-            Cell cell00 = new Cell(0);
+            Cell cell00 = new Cell(1);
             Cell cell01 = new Cell(0);
-            Cell cell02 = new Cell(0);
+            Cell cell02 = new Cell(3);
             Cell cell03 = new Cell(0);
             Cell cell10 = new Cell(0);
             Cell cell11 = new Cell(0);
             Cell cell12 = new Cell(0);
             Cell cell13 = new Cell(0);
-            Cell cell20 = new Cell(0);
+            Cell cell20 = new Cell(2);
             Cell cell21 = new Cell(0);
             Cell cell22 = new Cell(0);
             Cell cell23 = new Cell(0);
@@ -81,10 +81,13 @@ namespace Sudoku
             Board board = new Board(grids);
             board.print();
 
-            board.insertValueAtGivenCoordinate(8, new Coordinate(0, 0));
-            board.insertValueAtGivenCoordinate(8, new Coordinate(0, 2));
-            board.insertValueAtGivenCoordinate(4, new Coordinate(0, 1));
-            board.insertValueAtGivenCoordinate(4, new Coordinate(0, 3));
+            board.insertValueAtGivenCoordinate(1, new Coordinate(1, 1));
+            board.insertValueAtGivenCoordinate(3, new Coordinate(3, 2));
+            board.insertValueAtGivenCoordinate(2, new Coordinate(2, 3));
+            foreach (Coordinate coordinate in board.MisplacedValuesCoordinates)
+            {
+                coordinate.print();
+            }
         }
     }
 }

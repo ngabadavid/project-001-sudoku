@@ -6,27 +6,38 @@ namespace Sudoku.model
     public class Board
     {
         public List<Grid> Grids { get; set; }
+        public List<Coordinate> MisplacedValuesCoordinates { get; set; }
 
         public Board(List<Grid> grids)
         {
             this.Grids = grids;
+            this.MisplacedValuesCoordinates = new List<Coordinate>();
         }
         
-        public List<Grid> insertValueAtGivenCoordinate(int value, Coordinate absoluteCoordinate)
+        public void insertValueAtGivenCoordinate(int value, Coordinate absoluteCoordinate)
         {
-            List<Grid> gridsContainingCellAtGivenCoordinate = new List<Grid>();
+            //List<Grid> gridsContainingCellAtGivenCoordinate = new List<Grid>();
+            bool isMisplaced = false;
             foreach(Grid grid in Grids)
             {
                 if (checkIfGridContainCellAtGivenCoordinate(absoluteCoordinate, grid))
                 {
-                    gridsContainingCellAtGivenCoordinate.Add(grid);
+                    //gridsContainingCellAtGivenCoordinate.Add(grid);
                     Coordinate relativeCoordinate = transformAbsoluteCoordinateToRelativeCoordinate(absoluteCoordinate, grid);
                     grid.Cells[relativeCoordinate.Row, relativeCoordinate.Column].Value = value;
                     grid.print();
-                    Console.WriteLine(new Resolver().check_input_grid(grid));
+                    if(new Resolver().checkIfValueIsMisplaced(relativeCoordinate, grid)){
+                        isMisplaced = true;
+                        MisplacedValuesCoordinates.Add(absoluteCoordinate);
+                        break;
+                    }
                 }
             }
-            return gridsContainingCellAtGivenCoordinate;
+            if(!isMisplaced)
+            {
+                List<Coordinate> MisplacedValuesCoordinatestmp = MisplacedValuesCoordinates.FindAll(coordinate => coordinate.Row != absoluteCoordinate.Row && coordinate.Column != absoluteCoordinate.Column);
+                MisplacedValuesCoordinates = MisplacedValuesCoordinatestmp;
+            }
         }
 
         public bool checkIfGridContainCellAtGivenCoordinate(Coordinate absoluteCoordinate, Grid grid)
