@@ -46,6 +46,7 @@
     <Compile Include="model\Board.cs" />
     <Compile Include="model\Cell.cs" />
     <Compile Include="model\Coordinate.cs" />
+    <Compile Include="model\Divider.cs" />
     <Compile Include="model\Grid.cs" />
     <Compile Include="model\Resolver.cs" />
     <Compile Include="Program.cs" />
@@ -55,7 +56,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="model\Resolver.txt" />
+    <Content Include="Documentation\Resolver.txt" />
+    <Content Include="Documentation\SudokuPythonGenerator.txt" />
+    <Content Include="Documentation\SudokuPythonResolver.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

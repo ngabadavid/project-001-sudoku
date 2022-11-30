@@ -16,17 +16,15 @@ namespace Sudoku.model
         
         public void insertValueAtGivenCoordinate(int value, Coordinate absoluteCoordinate)
         {
-            //List<Grid> gridsContainingCellAtGivenCoordinate = new List<Grid>();
             bool isMisplaced = false;
             foreach(Grid grid in Grids)
             {
                 if (checkIfGridContainCellAtGivenCoordinate(absoluteCoordinate, grid))
                 {
-                    //gridsContainingCellAtGivenCoordinate.Add(grid);
                     Coordinate relativeCoordinate = transformAbsoluteCoordinateToRelativeCoordinate(absoluteCoordinate, grid);
                     grid.Cells[relativeCoordinate.Row, relativeCoordinate.Column].Value = value;
                     grid.print();
-                    if(new Resolver().checkIfValueIsMisplaced(relativeCoordinate, grid)){
+                    if(new Resolver().isMisplaced(relativeCoordinate, grid)){
                         isMisplaced = true;
                         MisplacedValuesCoordinates.Add(absoluteCoordinate);
                         break;
