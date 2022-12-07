@@ -12,9 +12,17 @@ namespace Sudoku.model
             this.Column = column;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Coordinate coordinate &&
+                   Row == coordinate.Row &&
+                   Column == coordinate.Column;
+        }
+
         public void print()
         {
             Console.WriteLine("("+ Row +","+ Column +")");
         }
+
     }
 }

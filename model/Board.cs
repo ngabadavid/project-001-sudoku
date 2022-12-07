@@ -14,16 +14,16 @@ namespace Sudoku.model
             this.MisplacedValuesCoordinates = new List<Coordinate>();
         }
         
-        public void insertValueAtGivenCoordinate(int value, Coordinate absoluteCoordinate)
+        public void InsertValueAtGivenCoordinate(int value, Coordinate absoluteCoordinate)
         {
             bool isMisplaced = false;
             foreach(Grid grid in Grids)
             {
-                if (checkIfGridContainCellAtGivenCoordinate(absoluteCoordinate, grid))
+                if (CheckIfGridContainCellAtGivenCoordinate(absoluteCoordinate, grid))
                 {
-                    Coordinate relativeCoordinate = transformAbsoluteCoordinateToRelativeCoordinate(absoluteCoordinate, grid);
+                    Coordinate relativeCoordinate = TransformAbsoluteCoordinateToRelativeCoordinate(absoluteCoordinate, grid);
                     grid.Cells[relativeCoordinate.Row, relativeCoordinate.Column].Value = value;
-                    grid.print();
+                    grid.Print();
                     if(new Resolver().isMisplaced(relativeCoordinate, grid)){
                         isMisplaced = true;
                         MisplacedValuesCoordinates.Add(absoluteCoordinate);
@@ -38,7 +38,7 @@ namespace Sudoku.model
             }
         }
 
-        public bool checkIfGridContainCellAtGivenCoordinate(Coordinate absoluteCoordinate, Grid grid)
+        public bool CheckIfGridContainCellAtGivenCoordinate(Coordinate absoluteCoordinate, Grid grid)
         {
             if (grid.Origin.Row <= absoluteCoordinate.Row && absoluteCoordinate.Row <= grid.Opposite.Row)
             {
@@ -50,17 +50,17 @@ namespace Sudoku.model
             return false;
         }
 
-        public Coordinate transformAbsoluteCoordinateToRelativeCoordinate(Coordinate absoluteCoordinate, Grid grid)
+        public Coordinate TransformAbsoluteCoordinateToRelativeCoordinate(Coordinate absoluteCoordinate, Grid grid)
         {
             return new Coordinate(absoluteCoordinate.Row - grid.Origin.Row, absoluteCoordinate.Column - grid.Origin.Column);
         }
 
-        public void print()
+        public void Print()
         {
             Console.WriteLine("Board: =====================================");
             foreach (Grid gridElement in this.Grids)
             {
-                gridElement.print();
+                gridElement.Print();
             }
         }
     }

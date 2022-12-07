@@ -14,7 +14,7 @@ namespace Sudoku
             //===================================================================================
             // Test insertion with overlaping grid : Success
             //===================================================================================
-            Coordinate origin1 = new Coordinate(0, 0);
+            /*Coordinate origin1 = new Coordinate(0, 0);
             Coordinate opposite1 = new Coordinate(1, 1);
             Cell cell100 = new Cell(0);
             Cell cell101 = new Cell(1);
@@ -23,7 +23,7 @@ namespace Sudoku
             Cell[,] cells1 = { { cell100 , cell101 },
                                { cell110 , cell111 } };
             Grid grid1 = new Grid(origin1, opposite1, cells1);
-            grid1.print();
+            grid1.Print();
 
             Coordinate origin2 = new Coordinate(1, 1);
             Coordinate opposite2 = new Coordinate(2, 2);
@@ -34,21 +34,21 @@ namespace Sudoku
             Cell[,] cells2 = { { cell211 , cell212 },
                                { cell221 , cell222 } };
             Grid grid2 = new Grid(origin2, opposite2, cells2);
-            grid2.print();
+            grid2.Print();
 
             List<Grid> grids = new List<Grid>();
             grids.Add(grid1);
             grids.Add(grid2);
 
             Board board = new Board(grids);
-            board.print();
+            board.Print();
 
-            board.insertValueAtGivenCoordinate(8, new Coordinate(0, 0));
-            board.print();
-            board.insertValueAtGivenCoordinate(9, new Coordinate(1, 1));
-            board.print();
-            board.insertValueAtGivenCoordinate(0, new Coordinate(2, 2));
-            board.print();
+            board.InsertValueAtGivenCoordinate(8, new Coordinate(0, 0));
+            board.Print();
+            board.InsertValueAtGivenCoordinate(9, new Coordinate(1, 1));
+            board.Print();
+            board.InsertValueAtGivenCoordinate(0, new Coordinate(2, 2));
+            board.Print();*/
 
             //===================================================================================
             // Test insertion with checking for misplaced value
@@ -172,6 +172,12 @@ namespace Sudoku
             {
                 coordinate.print();
             }*/
+
+            //===================================================================================
+            // Test random region generation
+            //===================================================================================
+            /*Grid g = new Grid(10000, 10000, new Coordinate(0, 0), new Coordinate(8,8)) ;
+            g.PrintRegionMap();*/
         }
     }
 }
