@@ -13,7 +13,7 @@ namespace Sudoku.model
         private int GridSwap { get; set; }
         public Coordinate Origin { get; set; }
         public Coordinate Opposite { get; set; }
-        private Region[] Regions { get; set; }
+        public Region[] Regions { get; set; }
         public int[,] RegionMap { get; set; }
         public Cell[,] Cells { get; set; }
         public Grid(int gridSeed,int gridSwap, Coordinate origin, Coordinate opposite)

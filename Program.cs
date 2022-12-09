@@ -111,11 +111,19 @@ namespace Sudoku
             {
                 coordinate.print();
             }*/
+
+            //===================================================================================
+            // Test random region generation
+            //===================================================================================
+            /*Grid g = new Grid(10000, 10000, new Coordinate(0, 0), new Coordinate(8,8)) ;
+            g.PrintRegionMap();*/
+
             //===================================================================================
             // Test insertion with checking for misplaced value with grid not originated at (0,0)
             //===================================================================================
-            /*Coordinate origin = new Coordinate(2, 3);
-            Coordinate opposite = new Coordinate(5, 6);
+            /*Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(5,6)) ;
+            grid.PrintRegionMap();
+
             Cell cell00 = new Cell(1);
             Cell cell01 = new Cell(0);
             Cell cell02 = new Cell(3);
@@ -138,46 +146,85 @@ namespace Sudoku
                 { cell20 , cell21, cell22, cell23 },
                 { cell30 , cell31, cell32, cell33 },
             };
-            Grid grid = new Grid(origin, opposite, cells);
-            grid.print();
+
+            grid.Cells = cells;
+
+            //Grid grid = new Grid(origin, opposite, cells);
+            //grid.print();
 
             List<Grid> grids = new List<Grid>();
             grids.Add(grid);
 
             Board board = new Board(grids);
-            board.print();
+            board.Print();
 
-            board.insertValueAtGivenCoordinate(1, new Coordinate(3, 4));
-            board.insertValueAtGivenCoordinate(3, new Coordinate(5, 5 ));
-            board.insertValueAtGivenCoordinate(2, new Coordinate(4, 6));
+            board.InsertValueAtGivenCoordinate(1, new Coordinate(3, 4));
+            board.InsertValueAtGivenCoordinate(3, new Coordinate(5, 5));
+            board.InsertValueAtGivenCoordinate(2, new Coordinate(4, 6));
             foreach (Coordinate coordinate in board.MisplacedValuesCoordinates)
             {
                 coordinate.print();
             }
 
-            board.insertValueAtGivenCoordinate(4, new Coordinate(3, 4));
+            board.InsertValueAtGivenCoordinate(4, new Coordinate(3, 4));
             foreach (Coordinate coordinate in board.MisplacedValuesCoordinates)
             {
                 coordinate.print();
             }
 
-            board.insertValueAtGivenCoordinate(5, new Coordinate(5, 5));
+            board.InsertValueAtGivenCoordinate(5, new Coordinate(5, 5));
             foreach (Coordinate coordinate in board.MisplacedValuesCoordinates)
             {
                 coordinate.print();
             }
 
-            board.insertValueAtGivenCoordinate(6, new Coordinate(4, 6));
+            board.InsertValueAtGivenCoordinate(6, new Coordinate(4, 6));
             foreach (Coordinate coordinate in board.MisplacedValuesCoordinates)
             {
                 coordinate.print();
-            }*/
+            }
+            */
+
 
             //===================================================================================
-            // Test random region generation
+            // Test solver
             //===================================================================================
-            /*Grid g = new Grid(10000, 10000, new Coordinate(0, 0), new Coordinate(8,8)) ;
-            g.PrintRegionMap();*/
+            Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(5, 6));
+            grid.PrintRegionMap();
+
+            Cell cell00 = new Cell(0);
+            Cell cell01 = new Cell(0);
+            Cell cell02 = new Cell(3);
+            Cell cell03 = new Cell(4);
+            Cell cell10 = new Cell(3);
+            Cell cell11 = new Cell(4);
+            Cell cell12 = new Cell(1);
+            Cell cell13 = new Cell(0);
+            Cell cell20 = new Cell(2);
+            Cell cell21 = new Cell(0);
+            Cell cell22 = new Cell(0);
+            Cell cell23 = new Cell(3);
+            Cell cell30 = new Cell(0);
+            Cell cell31 = new Cell(0);
+            Cell cell32 = new Cell(2);
+            Cell cell33 = new Cell(0);
+            Cell[,] cells = {
+                { cell00 , cell01, cell02, cell03 },
+                { cell10 , cell11, cell12, cell13 },
+                { cell20 , cell21, cell22, cell23 },
+                { cell30 , cell31, cell32, cell33 },
+            };
+
+            grid.Cells = cells;
+
+            List<Grid> grids = new List<Grid>();
+            grids.Add(grid);
+
+            Board board = new Board(grids);
+            board.Print();
+
+            Resolver r = new Resolver();
+            r.Solver(grid);
         }
     }
 }
