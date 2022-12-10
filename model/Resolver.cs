@@ -6,6 +6,7 @@ namespace Sudoku.model
 {
     class Resolver
     {
+        int counter = 0;
         public Resolver() { }
         public bool isMisplaced(Coordinate relativeCoordinate, Grid grid) 
         { 
@@ -127,32 +128,38 @@ namespace Sudoku.model
         }
 
         // Backtracking/recursive function to check all possible combinations of numbers until a solution is found
-        public bool Solver(Grid grid)
+        public bool Solver(int gridSeed, Grid grid)
         {
+            Random random = new Random(gridSeed);
             // Find next empty cell
             int gridSideLength = grid.Opposite.Row - grid.Origin.Row + 1;
+            List<int> values = new List<int>();
+            for (int value = 1; value <= gridSideLength; value++)
+            {
+                values.Add(value);
+            }
             for (int i = 0; i < grid.Cells.Length; i++)
             {
                 int row = i / gridSideLength;
                 int column = i % gridSideLength;
                 if (grid.Cells[row, column].Value == 0)
                 {
-                    for (int value = 1; value <= gridSideLength; value++)
+                    values = values.OrderBy(x => random.Next()).ToList();
+                    foreach (int value in values)
                     {
                         // Check that this value has not already be used on row, column or region
-                        bool test = !TestValueAtCoordinate(value, new Coordinate(row, column), grid);
-                        if (test)
+                        if (!TestValueAtCoordinate(value, new Coordinate(row, column), grid))
                         {
                             grid.Cells[row, column].Value = value;
-                            Console.WriteLine(test);
                             grid.Print();
                             if (CheckGrid(grid))
                             {
+                                counter += 1;
                                 return true;
                             }
                             else
                             {
-                                if (Solver(grid))
+                                if (Solver(gridSeed, grid))
                                 {
                                     return true;
                                 }

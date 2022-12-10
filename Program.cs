@@ -189,7 +189,7 @@ namespace Sudoku
             //===================================================================================
             // Test solver
             //===================================================================================
-            Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(5, 6));
+            /*Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(5, 6));
             grid.PrintRegionMap();
 
             Cell cell00 = new Cell(0);
@@ -224,7 +224,43 @@ namespace Sudoku
             board.Print();
 
             Resolver r = new Resolver();
-            r.Solver(grid);
+            r.Solver(999,grid);
+        }*/
+
+        //===================================================================================
+        // Test Radom Generator of a full grid
+        //===================================================================================
+            //Grid grid = new Grid(10000, 10, new Coordinate(2, 3), new Coordinate(5, 6));
+            Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(10, 11));
+            
+            int gridSideLength = grid.Opposite.Row - grid.Origin.Row + 1;
+            Console.WriteLine(gridSideLength);
+            int max = (int)Math.Pow(gridSideLength,2);
+            Console.WriteLine(max);
+            Cell[,] cells = new Cell[gridSideLength, gridSideLength];
+            for (int i = 0; i<max; i++)
+            {
+                int row = i / gridSideLength;
+                int column = i % gridSideLength;
+                cells[row, column] = new Cell(0);
+            }
+            for (int i = 0; i < max; i++)
+            {
+                int row = i / gridSideLength;
+                int column = i % gridSideLength;
+                Console.WriteLine(cells[row, column].Value);
+            }
+            grid.Cells = cells;
+
+            List<Grid> grids = new List<Grid>();
+            grids.Add(grid);
+
+            Board board = new Board(grids);
+            board.Print();
+
+            Resolver r = new Resolver();
+            r.Solver(156,grid);
+            grid.PrintRegionMap();
         }
     }
 }
