@@ -230,8 +230,8 @@ namespace Sudoku
         //===================================================================================
         // Test Radom Generator of a full grid
         //===================================================================================
-            //Grid grid = new Grid(10000, 10, new Coordinate(2, 3), new Coordinate(5, 6));
-            Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(10, 11));
+            //Grid grid = new Grid(10000, 0, new Coordinate(2, 3), new Coordinate(5, 6));
+            Grid grid = new Grid(10000, 50, new Coordinate(2, 3), new Coordinate(10, 11));
             
             int gridSideLength = grid.Opposite.Row - grid.Origin.Row + 1;
             Console.WriteLine(gridSideLength);
@@ -259,7 +259,10 @@ namespace Sudoku
             board.Print();
 
             Resolver r = new Resolver();
-            r.Solver(156,grid);
+            r.Solver(0,grid);
+            grid.RandomizeRegionEdge();
+            //grid.foo(new Coordinate(0, 0), 6);
+            grid.Print();
             grid.PrintRegionMap();
         }
     }

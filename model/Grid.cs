@@ -25,7 +25,7 @@ namespace Sudoku.model
 
 
             GenerateInitialRegionEdge();
-            RandomizeRegionEdge();
+            //RandomizeRegionEdge();
         }
 
         public void GenerateInitialRegionEdge()
@@ -239,6 +239,9 @@ namespace Sudoku.model
                                         regionA.SurroundingCellsCoordinates.RemoveAll(cell => cell.Equals(coordinate));
                                     }
                                 }
+
+                                // Reorganize the cells value table
+                                foo(finalCellInvadeByRegionA, Cells[cellInvadeByRegionB.Row, cellInvadeByRegionB.Column].Value);
 
                                 // Confirm that the invasion has been successul
                                 invasionByBSuccessful = true;
@@ -471,6 +474,23 @@ namespace Sudoku.model
                     Console.Write("|");
                 }
                 Console.WriteLine("");
+            }
+        }
+
+        public void foo(Coordinate coordinate, int value)
+        {
+            int a = Cells[coordinate.Row, coordinate.Column].Value;
+            Cells[coordinate.Row, coordinate.Column].Value = value;
+            for (int i = 0; i < 9; i++)
+            {
+                if (Cells[coordinate.Row, i].Value == value && i != coordinate.Column)
+                {
+                    foo(new Coordinate(coordinate.Row, i), a);
+                }
+                if (Cells[i, coordinate.Column].Value == value && i != coordinate.Row)
+                {
+                    foo(new Coordinate(i,coordinate.Column), a);
+                }
             }
         }
     }

@@ -6,10 +6,11 @@ namespace Sudoku.model
 {
     class Resolver
     {
-        int counter = 0;
+        public int count { get; set; }
         public Resolver() { }
         public bool isMisplaced(Coordinate relativeCoordinate, Grid grid) 
-        { 
+        {
+            count = 0;
             return (this.isMisplacedByRow(relativeCoordinate, grid) || this.isMisplacedByColumn(relativeCoordinate, grid)) || isMisplacedByRegion(relativeCoordinate, grid);
         }
 
@@ -151,10 +152,11 @@ namespace Sudoku.model
                         if (!TestValueAtCoordinate(value, new Coordinate(row, column), grid))
                         {
                             grid.Cells[row, column].Value = value;
+                            count++;
+                            Console.WriteLine(count);
                             grid.Print();
                             if (CheckGrid(grid))
                             {
-                                counter += 1;
                                 return true;
                             }
                             else
